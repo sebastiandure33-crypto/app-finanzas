@@ -32,16 +32,20 @@ class LogoPainter extends CustomPainter {
     this.punta = 1,
   });
 
-  static const _base = 80.0;
-  static const _ancho = 13.0;
-  static const _xs = [24.0, 43.0, 62.0];
-  static const _altos = [14.0, 24.0, 36.0];
+  static const _base = 76.0;
+  static const _ancho = 12.0;
+  static const _xs = [26.0, 44.0, 62.0];
+  static const _altos = [14.0, 24.0, 34.0];
+
+  /// Flecha recta, paralela a la pendiente de las barras.
   static const _puntos = [
-    Offset(20, 52),
-    Offset(38, 38),
-    Offset(50, 46),
-    Offset(74, 24),
+    Offset(24, 47),
+    Offset(70, 22),
   ];
+
+  /// Centro óptico del dibujo y escala para dejar margen en máscaras circulares.
+  static const _centro = Offset(49.6, 45.8);
+  static const _escalaContenido = 0.88;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -64,6 +68,12 @@ class LogoPainter extends CustomPainter {
       );
     }
 
+    // Contenido centrado y reducido (entra en íconos circulares sin recortarse)
+    canvas.save();
+    canvas.translate(50, 50);
+    canvas.scale(_escalaContenido);
+    canvas.translate(-_centro.dx, -_centro.dy);
+
     // Barras
     final pintaBarra = Paint()..color = LogoColores.blanco;
     for (var i = 0; i < 3; i++) {
@@ -83,7 +93,7 @@ class LogoPainter extends CustomPainter {
     final pintaRojo = Paint()
       ..color = LogoColores.rojo
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 7
+      ..strokeWidth = 9
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
 
@@ -111,9 +121,9 @@ class LogoPainter extends CustomPainter {
       final d = dir / dir.distance;
       final perp = Offset(-d.dy, d.dx);
       final triangulo = Path()
-        ..moveTo(fin.dx + d.dx * 10, fin.dy + d.dy * 10)
-        ..lineTo(fin.dx + perp.dx * 8 - d.dx * 1.5, fin.dy + perp.dy * 8 - d.dy * 1.5)
-        ..lineTo(fin.dx - perp.dx * 8 - d.dx * 1.5, fin.dy - perp.dy * 8 - d.dy * 1.5)
+        ..moveTo(fin.dx + d.dx * 12, fin.dy + d.dy * 12)
+        ..lineTo(fin.dx + perp.dx * 9.5 - d.dx * 1.5, fin.dy + perp.dy * 9.5 - d.dy * 1.5)
+        ..lineTo(fin.dx - perp.dx * 9.5 - d.dx * 1.5, fin.dy - perp.dy * 9.5 - d.dy * 1.5)
         ..close();
       canvas.save();
       canvas.translate(fin.dx, fin.dy);
@@ -129,6 +139,7 @@ class LogoPainter extends CustomPainter {
       canvas.restore();
     }
 
+    canvas.restore(); // contenido
     canvas.restore();
   }
 
