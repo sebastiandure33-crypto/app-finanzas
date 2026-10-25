@@ -21,6 +21,25 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.1
 
 flutter:
   uses-material-design: true
+
+# Ícono de la app:   dart run flutter_launcher_icons
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+  remove_alpha_ios: true
+  adaptive_icon_background: "#111111"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  min_sdk_android: 21
+
+# Fondo negro al abrir (antes de la animación):   dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#111111"
+  android_12:
+    color: "#111111"
+    icon_background_color: "#111111"

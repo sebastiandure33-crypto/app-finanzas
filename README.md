@@ -21,6 +21,12 @@ Control personal de ingresos, egresos y deudas. Datos guardados en el teléfono 
    flutter run
    ```
 
+Ícono y pantalla de inicio (una sola vez, y cada vez que cambies el logo):
+```
+dart run flutter_launcher_icons
+dart run flutter_native_splash:create
+```
+
 Nombre visible de la app en Android: editar `android:label` en `android/app/src/main/AndroidManifest.xml` (por ejemplo, `Mis Finanzas`).
 
 ## Moneda
